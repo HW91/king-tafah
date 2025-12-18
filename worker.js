@@ -47,4 +47,14 @@ function normalizeFragrances(data) {
     isDupe: f.is_dupe,
     originalId: f.original_id || null
   }));
+ 
+  function compareForSituation(original, dupe, situation) {
+  return {
+    similarity: dupe.similarity_score,
+    longevityDelta: dupe.longevity - original.longevity,
+    projectionDelta: dupe.projection - original.projection,
+    betterFor: dupe.longevity > original.longevity ? situation : "original"
+  };
+}
+
 }
