@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    :root {
+      --primary-color: var(--book-primary);
+      --secondary-color: var(--book-secondary);
+      --accent-color: var(--book-accent);
+    }
+
+    body {
+      font-family: system-ui;
+      background: var(--primary-color);
+      color: var(--secondary-color);
+    }
+  </style>
+</head>
+<body>
+  <h1>Dupe Dictionary</h1>
+
+  <select id="situation">
+    <option value="">All situations</option>
+    <option value="work">Work</option>
+    <option value="gym">Gym</option>
+    <option value="date">Date</option>
+  </select>
+
+  <select id="season">
+    <option value="">All seasons</option>
+    <option value="summer">Summer</option>
+    <option value="winter">Winter</option>
+  </select>
+
+  <div id="results"></div>
+
+  <script>
+    async function loadFragrances() {
+      const res = await fetch("/api/fragrances");
+      const fragrances = await res.json();
+      render(fragrances);
+    }
+
+    function render(fragrances) {
+      const container = document.getElementById("results");
+      container.innerHTML = "";
+
+      fragrances.forEach(f => {
+        const div = document.createElement("div");
+        div.textContent = `${f.name} (${f.brand}) | Longevity: ${f.longevity}`;
+        container.appendChild(div);
+      });
+    }
+
+    loadFragrances();
+  </script>
+</body>
+</html>
