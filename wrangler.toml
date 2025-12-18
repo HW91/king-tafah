@@ -1,0 +1,35 @@
+# Cloudflare Worker configuration
+name = "king-tafah"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+workers_dev = true
+
+# Static assets (serves index.html)
+[assets]
+directory = "./public"
+
+# Environment variables/secrets
+# Add your API keys as secrets using:
+#   npx wrangler secret put FRAGELLA_API_KEY
+#
+# Or for local development, create a .dev.vars file with:
+#   FRAGELLA_API_KEY=your_api_key_here
+
+[vars]
+# Non-sensitive environment variables can go here
+# EXAMPLE_VAR = "value"
+
+[observability]
+enabled = false
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
+
+[observability.traces]
+enabled = false
+persist = true
+head_sampling_rate = 1
